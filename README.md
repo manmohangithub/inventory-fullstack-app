@@ -6,7 +6,7 @@ A complete **Full-Stack Inventory Management System** built using **React, Pytho
 
 ##  Live Demo
 
-*  Frontend: https://your-netlify-link.netlify.app
+*  Frontend: https://inventory-fullstack-app.netlify.app/
 *  Backend: https://inventory-fullstack-app-production.up.railway.app
 
 ---
