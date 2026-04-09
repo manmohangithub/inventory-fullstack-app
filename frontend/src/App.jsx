@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const BASE_URL = "https://inventory-fullstack-app-production.up.railway.app"
+
 export default function App(){
  const [name,setName]=useState('')
  const [city,setCity]=useState('')
@@ -12,17 +14,33 @@ export default function App(){
  const [results,setResults]=useState([])
 
  const addSupplier=async()=>{
-  await fetch('http://localhost:5000/supplier',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,city})})
-  alert('Supplier added')
+  const res = await fetch(`${BASE_URL}/supplier`,{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({name,city})
+  })
+  const data = await res.json()
+  alert(data.message || "Supplier added")
  }
 
  const addInventory=async()=>{
-  await fetch('http://localhost:5000/inventory',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({supplier_id:Number(supplierId),product_name:product,category,quantity:Number(qty),price:Number(price)})})
-  alert('Inventory added')
+  const res = await fetch(`${BASE_URL}/inventory`,{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({
+     supplier_id:Number(supplierId),
+     product_name:product,
+     category,
+     quantity:Number(qty),
+     price:Number(price)
+   })
+  })
+  const data = await res.json()
+  alert(data.message || "Inventory added")
  }
 
  const doSearch=async()=>{
-  const res=await fetch(`http://localhost:5000/search?q=${search}`)
+  const res=await fetch(`${BASE_URL}/search?q=${search}`)
   const data=await res.json()
   setResults(data)
  }
@@ -50,7 +68,7 @@ export default function App(){
     <div key={r.id}>
      <h3>{r.product_name}</h3>
      <p>{r.category}</p>
-     <p>{r.price}</p>
+     <p>₹{r.price}</p>
     </div>
    ))}
   </div>
