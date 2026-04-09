@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",   ← ✅ ADD THIS
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
